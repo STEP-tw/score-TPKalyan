@@ -3,7 +3,7 @@ const Score = function(){
 }
 
 Score.prototype ={
-  increseBy : function(value){
+  increaseBy : function(value){
     this._value += value;
   },
   get value(){

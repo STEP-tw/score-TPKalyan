@@ -1,8 +1,6 @@
 let game=undefined;
-let food=undefined;
 let numberOfRows=60;
 let numberOfCols=120;
-let score = 0;
 
 let animator=undefined;
 
@@ -17,8 +15,8 @@ const animateSnake=function() {
   unpaintSnake(details.oldTail);
   paintHead(details.head);
   if(game.hasSnakeEatenFood()) {
-    score.increseBy(10);
-    displayText('#hidden_tail',`Score : ${score.value}`);
+    game.increaseScoreBy(10);
+    displayText('#hidden_tail',`Score : ${game.getScore()}`);
     game.grow();
     game.createFood();
     drawFood(game.getFood());
@@ -65,6 +63,7 @@ const createGame=function() {
   let topLeft=new Position(0,0,"east");
   let bottomRight=new Position(numberOfCols,numberOfRows,"east");
   game=new Game(topLeft,bottomRight);
+  game.addScore(new Score());
 }
 
 const startGame=function() {
@@ -72,8 +71,7 @@ const startGame=function() {
   createSnake();
   drawGrids(numberOfRows,numberOfCols);
   drawSnake(snake);
-  createScore(10);
-  displayText("#hidden_tail",`Score : ${score.value}`);
+  displayText("#hidden_tail",`Score : ${game.getScore()}`);
   drawSnake(game.getSnake());
   game.createFood();
   drawFood(game.getFood());
