@@ -24,3 +24,9 @@
   background-color: blue;
   border-radius: 50%;
 }
+
+#hidden_tail {
+  margin-top: 10px;
+  font-size: 2em;
+  text-align: center;
+}

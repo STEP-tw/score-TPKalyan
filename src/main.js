@@ -6,6 +6,11 @@ let score = 0;
 
 let animator=undefined;
 
+const displayText = function(elementName,text){
+  let element = document.querySelector(elementName);
+  element.innerText = text;
+}
+
 const animateSnake=function() {
   let oldHead=snake.getHead();
   let oldTail=snake.move();
@@ -14,16 +19,16 @@ const animateSnake=function() {
   unpaintSnake(oldTail);
   paintHead(head);
   if(head.isSameCoordAs(food)) {
-    increaseScore();
-    console.log(score);
+    score.increseBy(10);
+    displayText('#hidden_tail',`Score : ${score.value}`);
     snake.grow();
     createFood(numberOfRows,numberOfCols);
     drawFood(food);
   }
 }
 
-const increaseScore = function(){
-  score += 10;
+const createScore = function(incrementalValue){
+  score = new Score();
 }
 
 const changeSnakeDirection=function(event) {
@@ -65,8 +70,10 @@ const startGame=function() {
   createSnake();
   drawGrids(numberOfRows,numberOfCols);
   drawSnake(snake);
+  createScore(10);
   createFood(numberOfRows,numberOfCols);
   drawFood(food);
+  displayText("#hidden_tail",`Score : ${score.value}`);
   addKeyListener();
   animator=setInterval(animateSnake,140);
 }
